@@ -5,17 +5,27 @@
  */
 package pacman;
 
+import pacman.game.GameLoop;
+import pacman.graphics.GraphicsLoop;
+
 /**
  *
  * @author David
  */
 public class Pacman {
-
+	private static final long ONE_SECOND = 1000;
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		// TODO code application logic here
+		GameLoop gameL = new GameLoop();
+		GraphicsLoop graphL = new GraphicsLoop();
+		while(true){
+			long start = System.currentTimeMillis();
+			gameL.tick();
+			graphL.tick();
+			while(System.currentTimeMillis() - start < (ONE_SECOND/60));
+		}
 	}
 	
 }
