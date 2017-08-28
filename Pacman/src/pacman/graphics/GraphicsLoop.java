@@ -11,6 +11,7 @@ import pacman.LoopPart;
 public class GraphicsLoop implements LoopPart{
 	public GraphicsLoop(){
             System.out.println("bag of dick");
+			System.out.println("sloppy biscuits");
 	}
 	@Override
 	public void tick(){
