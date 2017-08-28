@@ -9,9 +9,10 @@ package pacman.graphics;
 import pacman.LoopPart;
 
 public class GraphicsLoop implements LoopPart{
+    
 	public GraphicsLoop(){
             System.out.println("bag of dick");
-			System.out.println("sloppy biscuits");
+            System.out.println("sloppycock");
 	}
 	@Override
 	public void tick(){
