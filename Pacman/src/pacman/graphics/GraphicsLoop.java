@@ -10,13 +10,8 @@ import pacman.LoopPart;
 
 public class GraphicsLoop implements LoopPart{
 	public GraphicsLoop(){
-		
+            System.out.println("bag of dick");
 	}
-	/*
-	*This will delegate any Graphical Requirements to items that require it
-	*and as we decide what we want to make more complex we may add more
-	*Things to pass to more specific items
-	*/
 	@Override
 	public void tick(){
 		
