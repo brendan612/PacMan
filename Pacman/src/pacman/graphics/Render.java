@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman;
+package pacman.graphics;
+
+import java.awt.Graphics;
 
 /**
  *
- * @author David
+ * @author Bren
  */
-public interface LoopPart {
-	public abstract void tick();
+public interface Render {
+    public abstract void render(Graphics g);
 }

@@ -24,7 +24,7 @@ public class Pacman {
 			long start = System.currentTimeMillis();
 			gameL.tick();
 			graphL.tick();
-			while(System.currentTimeMillis() - start < (ONE_SECOND/60));
+			//while(System.currentTimeMillis() - start < (ONE_SECOND/60));
 		}
 	}
 	
