@@ -18,8 +18,8 @@ public class Pacman {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		GameLoop gameL = new GameLoop();
 		GraphicsLoop graphL = new GraphicsLoop();
+		GameLoop gameL = new GameLoop(graphL);
 		while(true){
 		long start = System.currentTimeMillis();
 			graphL.tick();

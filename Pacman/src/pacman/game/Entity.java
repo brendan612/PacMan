@@ -5,13 +5,14 @@
  */
 package pacman.game;
 
-import javafx.scene.effect.Light.Point;
+import java.awt.Point;
+import pacman.LoopPart;
 
 /**
  *
  * @author Bren
  */
-public abstract class Entity {
+public abstract class Entity implements LoopPart {
     
     public Entity(){
         

@@ -5,19 +5,27 @@
  */
 package pacman.game;
 
+import java.util.ArrayList;
 import pacman.LoopPart;
+import pacman.graphics.GraphicsLoop;
 
 /**
  *
  * @author Bren
  */
 public class EntityManager implements LoopPart {
-    public EntityManager(){
-		
+	GraphicsLoop graphL;
+	ArrayList<Entity> entities = new ArrayList<>();
+    public EntityManager(GraphicsLoop gl){
+		entities.add(new Player(gl));
+		graphL = gl;
 	}
 	
 	@Override
 	public void tick(){
-		
+		entities.forEach((e) -> {
+			e.tick();
+		});
+		graphL.getBs().show();
 	}
 }

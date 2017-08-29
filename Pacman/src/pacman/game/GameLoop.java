@@ -7,10 +7,14 @@
 package pacman.game;
 
 import pacman.LoopPart;
+import pacman.graphics.GraphicsLoop;
 
 public class GameLoop implements LoopPart{
-	public GameLoop(){
-		EntityManager em = new EntityManager();
+	GraphicsLoop graphL;
+	EntityManager em;
+	public GameLoop(GraphicsLoop gl){
+		em = new EntityManager(gl);
+		graphL = gl;
 	}
 	/*
 	*This will tick every frame of the game and will delegate the tasks
@@ -18,10 +22,9 @@ public class GameLoop implements LoopPart{
 	*/
 	@Override
 	public void tick(){
-		
+		em.tick();
 	}
 
     public void render() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

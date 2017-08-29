@@ -17,19 +17,28 @@ public class GraphicsLoop implements LoopPart {
     private Display display;
     
     private BufferStrategy bs;
-    private static Graphics g;
+    private Graphics g;
     
     public GraphicsLoop() {
         display = new Display(TITLE,WIDTH,HEIGHT);
     }
 
-	public static Graphics getG() {
+	public Graphics getG() {
 		return g;
 	}
 
-	public static void setG(Graphics g) {
-		GraphicsLoop.g = g;
+	public void setG(Graphics g) {
+		this.g = g;
 	}
+
+	public BufferStrategy getBs() {
+		return bs;
+	}
+
+	public void setBs(BufferStrategy bs) {
+		this.bs = bs;
+	}
+	
 
     @Override
 	//The tick method is overall a general method for what each 
@@ -41,11 +50,8 @@ public class GraphicsLoop implements LoopPart {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
-        GraphicsLoop.setG(bs.getDrawGraphics());
-        GraphicsLoop.getG().clearRect(0, 0, WIDTH, HEIGHT);
-        //End draw
-        bs.show();
-		GraphicsLoop.setG(null);
+        g = (bs.getDrawGraphics());
+        g.clearRect(0, 0, WIDTH, HEIGHT);
     }
     
 }

@@ -42,6 +42,7 @@ public class Display {
         canvas.setBackground(Color.black);
         frame.add(canvas);
         frame.pack();
+		canvas.createBufferStrategy(3);
     }
     public Canvas getCanvas(){
         return canvas;

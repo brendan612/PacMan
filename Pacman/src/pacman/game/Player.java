@@ -20,19 +20,20 @@ import pacman.graphics.GraphicsLoop;
 public class Player extends Entity implements LoopPart{
     
     private Image[] playerImage = new Image[1];
+	private GraphicsLoop graphL;
     
-    public Player(){
+    public Player(GraphicsLoop gl){
+		graphL = gl;
         try{
             playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacman.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
     @Override
     public void tick() {
-        GraphicsLoop.getG().drawImage(playerImage[0], 250, 250, null);
+		if(graphL.getG() != null)
+			graphL.getG().drawImage(playerImage[0], 250, 250, null);
     }
     
 }
