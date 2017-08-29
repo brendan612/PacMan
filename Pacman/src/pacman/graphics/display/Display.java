@@ -21,6 +21,7 @@ public class Display {
         this.height = height;
   
         createDisplay(); //Initialize JFrame and Canvas
+        
     }
     private void createDisplay(){
         frame = new JFrame(title);
@@ -28,7 +29,7 @@ public class Display {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setResizable(false);
-        frame.setIconImage(new ImageIcon("res/images/icon.gif").getImage());
+        frame.setIconImage(new ImageIcon("Resources/images/external/pacman.jpg").getImage());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         
