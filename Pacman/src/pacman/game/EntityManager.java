@@ -3,12 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman.graphics;
+package pacman.game;
+
+import pacman.LoopPart;
 
 /**
  *
  * @author Bren
  */
-public class EntityManager {
-    
+public class EntityManager implements LoopPart {
+    public EntityManager(){
+		
+	}
+	
+	@Override
+	public void tick(){
+		
+	}
 }

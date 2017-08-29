@@ -15,7 +15,6 @@ public class GraphicsLoop implements LoopPart {
     private final int WIDTH = 500, HEIGHT = 500;
     
     private Display display;
-    private Player player;
     
     private BufferStrategy bs;
     private static Graphics g;

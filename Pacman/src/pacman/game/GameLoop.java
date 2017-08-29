@@ -10,7 +10,7 @@ import pacman.LoopPart;
 
 public class GameLoop implements LoopPart{
 	public GameLoop(){
-		
+		EntityManager em = new EntityManager();
 	}
 	/*
 	*This will tick every frame of the game and will delegate the tasks

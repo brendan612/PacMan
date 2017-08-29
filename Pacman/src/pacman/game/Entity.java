@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman.graphics;
+package pacman.game;
 
 import javafx.scene.effect.Light.Point;
 

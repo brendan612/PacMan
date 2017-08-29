@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman.graphics;
+package pacman.game;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import pacman.LoopPart;
+import pacman.graphics.GraphicsLoop;
 
 /**
  *
