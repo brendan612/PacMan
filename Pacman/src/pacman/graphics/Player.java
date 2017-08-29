@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman;
+package pacman.graphics;
 
 /**
  *
- * @author David
+ * @author Bren
  */
-public interface LoopPart {
-	public abstract void tick();
-        public abstract void render();
+public class Player extends Entity{
+    
+    public Player(){
+        
+    }
+    
 }

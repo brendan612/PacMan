@@ -20,4 +20,9 @@ public class GameLoop implements LoopPart{
 	public void tick(){
 		
 	}
+
+    @Override
+    public void render() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
