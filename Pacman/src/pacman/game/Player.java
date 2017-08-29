@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import java.awt.Image;
+import java.awt.Point;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
+import pacman.userinput.InputDevice;
 
 /**
  *
@@ -20,10 +22,9 @@ import pacman.graphics.GraphicsLoop;
 public class Player extends Entity implements LoopPart{
     
     private Image[] playerImage = new Image[1];
-	private GraphicsLoop graphL;
     
-    public Player(GraphicsLoop gl){
-		graphL = gl;
+    public Player(InputDevice id, GraphicsLoop gl, Point pos){
+		super(id, gl, pos);
         try{
             playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacman.jpg"));
         } catch (IOException ex) {
@@ -32,8 +33,23 @@ public class Player extends Entity implements LoopPart{
     }
     @Override
     public void tick() {
-		if(graphL.getG() != null)
-			graphL.getG().drawImage(playerImage[0], 250, 250, null);
+		Point newPos = super.getPos();
+		switch(super.getMover().direction()){
+			case 0:
+				newPos.y -= 2;
+				break;
+			case 1:
+				newPos.x -=2;
+				break;
+			case 2:
+				newPos.y += 2;
+				break;
+			case 3:
+				newPos.x += 2;
+				break;
+		};
+		if(super.getGl().getG() != null)
+			super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, null);
     }
     
 }

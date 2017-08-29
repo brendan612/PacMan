@@ -5,9 +5,12 @@
  */
 package pacman.game;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
+import pacman.userinput.InputDevice;
+import pacman.userinput.KeyboardInput;
 
 /**
  *
@@ -16,8 +19,11 @@ import pacman.graphics.GraphicsLoop;
 public class EntityManager implements LoopPart {
 	GraphicsLoop graphL;
 	ArrayList<Entity> entities = new ArrayList<>();
-    public EntityManager(GraphicsLoop gl){
-		entities.add(new Player(gl));
+	InputDevice id;//Will add a settings page once we want to add more devices
+	
+    public EntityManager(InputDevice id, GraphicsLoop gl){
+		this.id = id;
+		entities.add(new Player(id, gl, new Point(150,150)));
 		graphL = gl;
 	}
 	

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import pacman.LoopPart;
 import pacman.graphics.display.Display;
+import pacman.userinput.InputDevice;
 
 public class GraphicsLoop implements LoopPart {
     private final String TITLE = "Pac-Man";
@@ -19,8 +20,8 @@ public class GraphicsLoop implements LoopPart {
     private BufferStrategy bs;
     private Graphics g;
     
-    public GraphicsLoop() {
-        display = new Display(TITLE,WIDTH,HEIGHT);
+    public GraphicsLoop(InputDevice id) {
+        display = new Display(TITLE,WIDTH,HEIGHT, id);
     }
 
 	public Graphics getG() {

@@ -8,12 +8,13 @@ package pacman.game;
 
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
+import pacman.userinput.InputDevice;
 
 public class GameLoop implements LoopPart{
 	GraphicsLoop graphL;
 	EntityManager em;
-	public GameLoop(GraphicsLoop gl){
-		em = new EntityManager(gl);
+	public GameLoop(InputDevice id, GraphicsLoop gl){
+		em = new EntityManager(id, gl);
 		graphL = gl;
 	}
 	/*

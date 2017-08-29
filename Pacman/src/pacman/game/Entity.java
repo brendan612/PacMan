@@ -7,22 +7,45 @@ package pacman.game;
 
 import java.awt.Point;
 import pacman.LoopPart;
+import pacman.graphics.GraphicsLoop;
+import pacman.userinput.InputDevice;
 
 /**
  *
  * @author Bren
  */
 public abstract class Entity implements LoopPart {
+	InputDevice mover;
+	GraphicsLoop gl;
+	Point pos;
     
-    public Entity(){
-        
+    public Entity(InputDevice id, GraphicsLoop gl, Point pos){
+        mover = id;
+		this.gl = gl;
+		this.pos = pos;
     }
+
+	public InputDevice getMover() {
+		return mover;
+	}
+
+	public void setMover(InputDevice mover) {
+		this.mover = mover;
+	}
+
+	public GraphicsLoop getGl() {
+		return gl;
+	}
+
+	public void setGl(GraphicsLoop gl) {
+		this.gl = gl;
+	}
     
     public Point getPos(){
-        return null;
+        return pos;
     }
-    
-    public boolean isAlive(){
-        return false;
-    }
+	
+	public void setPos(Point pos){
+		this.pos = pos;
+	}
 }

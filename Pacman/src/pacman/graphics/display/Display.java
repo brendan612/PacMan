@@ -4,8 +4,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import pacman.userinput.InputDevice;
 
 public class Display {
     
@@ -15,15 +17,15 @@ public class Display {
     private String title;
     private int width, height;
     
-    public Display(String title, int width, int height){
+    public Display(String title, int width, int height, InputDevice id){
         this.title = title;
         this.width = width;
         this.height = height;
   
-        createDisplay(); //Initialize JFrame and Canvas
+        createDisplay(id); //Initialize JFrame and Canvas
         
     }
-    private void createDisplay(){
+    private void createDisplay(InputDevice id){
         frame = new JFrame(title);
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +34,7 @@ public class Display {
         frame.setIconImage(new ImageIcon("Resources/images/external/pacman.jpg").getImage());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+		frame.addKeyListener((KeyListener)id.getEventListener());
         
         
         canvas = new Canvas();
