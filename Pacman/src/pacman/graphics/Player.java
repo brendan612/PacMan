@@ -18,7 +18,7 @@ import pacman.LoopPart;
  *
  * @author Bren
  */
-public class Player extends Entity implements Render{
+public class Player extends Entity implements LoopPart{
     
     private Image[] playerImage = new Image[1];
     
@@ -32,8 +32,8 @@ public class Player extends Entity implements Render{
         
     }
     @Override
-    public void render(Graphics g) {
-        g.drawImage(playerImage[0], 250, 250, null);
+    public void tick() {
+        GraphicsLoop.getG().drawImage(playerImage[0], 250, 250, null);
     }
     
 }

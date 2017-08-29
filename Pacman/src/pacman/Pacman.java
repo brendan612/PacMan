@@ -21,10 +21,11 @@ public class Pacman {
 		GameLoop gameL = new GameLoop();
 		GraphicsLoop graphL = new GraphicsLoop();
 		while(true){
-			long start = System.currentTimeMillis();
-			gameL.tick();
+		long start = System.currentTimeMillis();
 			graphL.tick();
-			//while(System.currentTimeMillis() - start < (ONE_SECOND/60));
+			gameL.tick();
+			//controls the FPS currently set up to run at 60 (Will probably shorten this time later)
+			while(System.currentTimeMillis() - start < (ONE_SECOND/60));
 		}
 	}
 	

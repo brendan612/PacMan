@@ -18,31 +18,35 @@ public class GraphicsLoop implements LoopPart {
     private Player player;
     
     private BufferStrategy bs;
-    private Graphics g;
+    private static Graphics g;
     
     public GraphicsLoop() {
         display = new Display(TITLE,WIDTH,HEIGHT);
-        player = new Player();
     }
 
+	public static Graphics getG() {
+		return g;
+	}
+
+	public static void setG(Graphics g) {
+		GraphicsLoop.g = g;
+	}
+
     @Override
+	//The tick method is overall a general method for what each 
+	//object needs to do each tick 
+	//(IT IS LITERALLY THE SAME AS THE RENDER METHOD)
     public void tick() {
-        render();
-    }
-    
-    public void render() {
         bs = display.getCanvas().getBufferStrategy();
         if(bs == null){
             display.getCanvas().createBufferStrategy(3);
             return;
         }
-        g = bs.getDrawGraphics();
-        g.clearRect(0, 0, WIDTH, HEIGHT);
-        
-        player.render(g);
+        GraphicsLoop.setG(bs.getDrawGraphics());
+        GraphicsLoop.getG().clearRect(0, 0, WIDTH, HEIGHT);
         //End draw
         bs.show();
-        g.dispose();
-        
+		GraphicsLoop.setG(null);
     }
+    
 }
