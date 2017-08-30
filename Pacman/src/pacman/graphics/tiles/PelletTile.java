@@ -1,6 +1,5 @@
 package pacman.graphics.tiles;
-import java.awt.Point;
-import pacman.graphics.GraphicsLoop;
+import java.awt.Graphics;
 import pacman.graphics.Map;
 /**
  *

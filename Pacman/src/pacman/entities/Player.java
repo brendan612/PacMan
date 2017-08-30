@@ -14,6 +14,7 @@ import java.awt.Point;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
 import pacman.userinput.InputDevice;
+import pacman.graphics.Map;
 
 /**
  *
@@ -27,8 +28,10 @@ public class Player extends Entity implements LoopPart{
     public Player(InputDevice id, GraphicsLoop gl, Point pos){
 		super(gl, pos);
 		this.id = id;
+                super.setPos(Map.playerSpawn);
+                System.out.println(Map.playerSpawn);
         try{
-            playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacLogo.jpg"));
+            playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/entities/pacman.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,7 +54,7 @@ public class Player extends Entity implements LoopPart{
 				break;
 		};
 		if(super.getGl().getG() != null)
-			super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, null);
+			super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y,32,32, null);
     }
     
 }

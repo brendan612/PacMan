@@ -23,6 +23,10 @@ public class EntityManager implements LoopPart {
     public EntityManager(InputDevice id, GraphicsLoop gl){
 		this.id = id;
 		entities.add(new Player(id, gl, new Point(150,150)));
+                
+                for(int i = 0; i < 4; i++)
+                    entities.add(new Ghost(gl,new Point(150,250),i));
+                
 		graphL = gl;
 	}
 	

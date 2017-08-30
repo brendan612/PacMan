@@ -5,16 +5,18 @@
  */
 package pacman.graphics;
 
+import java.awt.Color;
 import pacman.entities.Player;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import pacman.LoopPart;
 import pacman.graphics.display.Display;
+import pacman.graphics.tiles.Tile;
 import pacman.userinput.InputDevice;
 
 public class GraphicsLoop implements LoopPart{
     private final String TITLE = "Pac-Man";
-    private final int WIDTH = 500, HEIGHT = 500;
+    private final int WIDTH = 28*32, HEIGHT = 31*32;
     
     private Display display;
     private Map map;
@@ -55,9 +57,8 @@ public class GraphicsLoop implements LoopPart{
             return;
         }
         g = (bs.getDrawGraphics());
-        map.tick();
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        
+        map.tick();
     }
     
 }
