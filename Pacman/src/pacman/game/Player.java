@@ -22,9 +22,11 @@ import pacman.userinput.InputDevice;
 public class Player extends Entity implements LoopPart{
     
     private Image[] playerImage = new Image[1];
+	private InputDevice id;
     
     public Player(InputDevice id, GraphicsLoop gl, Point pos){
-		super(id, gl, pos);
+		super(gl, pos);
+		this.id = id;
         try{
             playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacman.jpg"));
         } catch (IOException ex) {
@@ -34,7 +36,7 @@ public class Player extends Entity implements LoopPart{
     @Override
     public void tick() {
 		Point newPos = super.getPos();
-		switch(super.getMover().direction()){
+		switch(id.direction()){
 			case 0:
 				newPos.y -= 2;
 				break;
