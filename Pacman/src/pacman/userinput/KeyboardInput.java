@@ -13,17 +13,14 @@ public class KeyboardInput implements InputDevice{
 		kl = new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent ke) {
-				System.out.println("key Typed");
 			}
 
 			@Override
 			public void keyPressed(KeyEvent ke) {
-				System.out.println("keyPressed");
 			}
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
-				System.out.println("key released" + ke.getKeyCode());
 				switch (ke.getKeyCode()) {
 					case KeyEvent.VK_W:
 						directionMoving = 0;
