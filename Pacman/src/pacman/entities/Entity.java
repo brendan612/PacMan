@@ -5,23 +5,37 @@
  */
 package pacman.entities;
 
-import javafx.scene.effect.Light.Point;
+
+import java.awt.Point;
+import pacman.LoopPart;
+import pacman.graphics.GraphicsLoop;
 
 /**
  *
  * @author Bren
  */
-public abstract class Entity {
+public abstract class Entity implements LoopPart {
+	GraphicsLoop gl;
+	Point pos;
     
-    public Entity(){
-        
+    public Entity( GraphicsLoop gl, Point pos){
+		this.gl = gl;
+		this.pos = pos;
     }
+
+	public GraphicsLoop getGl() {
+		return gl;
+	}
+
+	public void setGl(GraphicsLoop gl) {
+		this.gl = gl;
+	}
     
     public Point getPos(){
-        return null;
+        return pos;
     }
-    
-    public boolean isAlive(){
-        return false;
-    }
+	
+	public void setPos(Point pos){
+		this.pos = pos;
+	}
 }
