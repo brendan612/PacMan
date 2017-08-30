@@ -28,7 +28,7 @@ public class Player extends Entity implements LoopPart{
 		super(gl, pos);
 		this.id = id;
         try{
-            playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacman.jpg"));
+            playerImage[0] = ImageIO.read(getClass().getResourceAsStream("/images/external/pacLogo.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }

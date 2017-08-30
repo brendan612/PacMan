@@ -31,7 +31,7 @@ public class Display {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setResizable(false);
-        frame.setIconImage(new ImageIcon("Resources/images/external/pacman.jpg").getImage());
+        frame.setIconImage(new ImageIcon("Resources/images/external/pacLogo.jpg").getImage());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 		frame.addKeyListener((KeyListener)id.getEventListener());
