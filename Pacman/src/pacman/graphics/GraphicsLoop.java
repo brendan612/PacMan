@@ -5,13 +5,14 @@
  */
 package pacman.graphics;
 
+import pacman.entities.Player;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import pacman.LoopPart;
 import pacman.graphics.display.Display;
 import pacman.userinput.InputDevice;
 
-public class GraphicsLoop implements LoopPart {
+public class GraphicsLoop implements LoopPart{
     private final String TITLE = "Pac-Man";
     private final int WIDTH = 500, HEIGHT = 500;
     

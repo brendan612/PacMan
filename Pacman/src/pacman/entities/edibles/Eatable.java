@@ -1,6 +1,7 @@
-package pacman.game;
+package pacman.entities.edibles;
 
 import java.awt.Point;
+import pacman.game.Entity;
 import pacman.graphics.GraphicsLoop;
 
 public abstract class Eatable extends Entity {

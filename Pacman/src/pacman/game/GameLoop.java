@@ -6,6 +6,7 @@
 
 package pacman.game;
 
+import pacman.entities.EntityManager;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
 import pacman.userinput.InputDevice;

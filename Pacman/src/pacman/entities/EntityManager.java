@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pacman.game;
+package pacman.entities;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import pacman.LoopPart;
+import pacman.game.Entity;
+import pacman.game.Player;
 import pacman.graphics.GraphicsLoop;
 import pacman.userinput.InputDevice;
 import pacman.userinput.KeyboardInput;
