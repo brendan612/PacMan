@@ -7,8 +7,10 @@ package pacman.entities;
 
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
+import pacman.graphics.tiles.Tile;
 
 /**
  *
@@ -18,9 +20,11 @@ public abstract class Entity implements LoopPart {
 	GraphicsLoop gl;
 	Point pos;
     
+    protected Rectangle bounds;
     public Entity( GraphicsLoop gl, Point pos){
 		this.gl = gl;
 		this.pos = pos;
+                bounds = new Rectangle(0,0,Tile.TILE_WIDTH,Tile.TILE_HEIGHT);
     }
 
 	public GraphicsLoop getGl() {
@@ -38,4 +42,14 @@ public abstract class Entity implements LoopPart {
 	public void setPos(Point pos){
 		this.pos = pos;
 	}
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+        
+        
 }

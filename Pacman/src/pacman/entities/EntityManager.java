@@ -17,26 +17,28 @@ import pacman.userinput.InputDevice;
  * @author Bren
  */
 public class EntityManager implements LoopPart {
-	GraphicsLoop graphL;
-	ArrayList<Entity> entities = new ArrayList<>();
-	InputDevice id;//Will add a settings page once we want to add more devices
-	
-    public EntityManager(InputDevice id, GraphicsLoop gl){
-		this.id = id;
-		entities.add(new Player(id, gl, new Point(150,150)));
-        entities.add(new Ghost(gl,new Point(150,250),GhostNames.Blinky));
-        entities.add(new Ghost(gl,new Point(150,250),GhostNames.Pinky));
-        entities.add(new Ghost(gl,new Point(150,250),GhostNames.Inky));
-        entities.add(new Ghost(gl,new Point(150,250),GhostNames.Clyde));
-                
-		graphL = gl;
-	}
-	
-	@Override
-	public void tick(){
-		entities.forEach((e) -> {
-			e.tick();
-		});
-		graphL.getBs().show();
-	}
+
+    GraphicsLoop graphL;
+    ArrayList<Entity> entities = new ArrayList<>();
+    InputDevice id;//Will add a settings page once we want to add more devices
+
+    public EntityManager(InputDevice id, GraphicsLoop gl) {
+        this.id = id;
+        graphL = gl;
+        entities.add(new Player(id, gl, new Point(150, 150), graphL.getMap()));
+        entities.add(new Ghost(gl, new Point(150, 250), GhostNames.Blinky));
+        entities.add(new Ghost(gl, new Point(150, 250), GhostNames.Pinky));
+        entities.add(new Ghost(gl, new Point(150, 250), GhostNames.Inky));
+        entities.add(new Ghost(gl, new Point(150, 250), GhostNames.Clyde));
+
+        
+    }
+
+    @Override
+    public void tick() {
+        entities.forEach((e) -> {
+            e.tick();
+        });
+        graphL.getBs().show();
+    }
 }

@@ -60,5 +60,14 @@ public class GraphicsLoop implements LoopPart{
         g.clearRect(0, 0, WIDTH, HEIGHT);
         map.tick();
     }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+    
     
 }
