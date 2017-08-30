@@ -38,8 +38,7 @@ public class Map implements LoopPart {
         ghostTextures[1] = ImageLoader.loadImage("/images/entities/pinky.jpg");
         ghostTextures[2] = ImageLoader.loadImage("/images/entities/inky.jpg");
         ghostTextures[3] = ImageLoader.loadImage("/images/entities/clyde.jpg");
-
-        loadMapAsString("C:\\Users\\Bren\\OneDrive - Waukesha County Technical College\\WCTC\\Solo Projects\\Pacman\\Pacman\\src\\pacman\\graphics\\mapLayout.txt");
+        loadMapAsString("mapLayout.txt");
     }
 
     @Override
