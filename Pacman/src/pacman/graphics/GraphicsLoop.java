@@ -17,12 +17,14 @@ public class GraphicsLoop implements LoopPart{
     private final int WIDTH = 500, HEIGHT = 500;
     
     private Display display;
+    private Map map;
     
     private BufferStrategy bs;
     private Graphics g;
     
     public GraphicsLoop(InputDevice id) {
         display = new Display(TITLE,WIDTH,HEIGHT, id);
+        map = new Map(this);
     }
 
 	public Graphics getG() {
@@ -53,7 +55,9 @@ public class GraphicsLoop implements LoopPart{
             return;
         }
         g = (bs.getDrawGraphics());
+        map.tick();
         g.clearRect(0, 0, WIDTH, HEIGHT);
+        
     }
     
 }

@@ -18,7 +18,7 @@ public class Map implements LoopPart {
     private GraphicsLoop gl;
     private final int WIDTH = 28, HEIGHT = 30;
     public static BufferedImage emptyTexture, wallTexture, pelletTexture, superPelletTexture, pacmanTexture, gateTexture;
-    public static BufferedImage[] ghostTextures;
+    public static BufferedImage[] ghostTextures = new BufferedImage[4];
     private int[][] tiles;
     public Map(GraphicsLoop gl){
         this.gl = gl;
@@ -28,8 +28,8 @@ public class Map implements LoopPart {
     public void init(){
         emptyTexture = ImageLoader.loadImage("/images/map/empty.jpg");
         wallTexture = ImageLoader.loadImage("/images/map/wall.jpg");
-        pelletTexture = ImageLoader.loadImage("images/entities/pellet.jpg");
-        superPelletTexture = ImageLoader.loadImage("images/entities/super-pellet.jpg");
+        pelletTexture = ImageLoader.loadImage("/images/entities/pellet.jpg");
+        superPelletTexture = ImageLoader.loadImage("/images/entities/super-pellet.jpg");
         pacmanTexture = ImageLoader.loadImage("/images/entities/pacman.jpg");
         ghostTextures[0] = ImageLoader.loadImage("/images/entities/blinky.jpg");
         ghostTextures[1] = ImageLoader.loadImage("/images/entities/pinky.jpg");
@@ -39,10 +39,10 @@ public class Map implements LoopPart {
 
     @Override
     public void tick() {
-        for (int y = 0; y < 30*16; y++){
-            for(int x = 0; x < 28*16; x++){
+        for (int y = 0; y < HEIGHT*16; y++){
+            for(int x = 0; x < WIDTH*16; x++){
                 getTile(x,y).tick(gl.getG(), (int) (x * Tile.TILE_WIDTH), 
-                                       (int) (y * Tile.TILE_HEIGHT));
+                                             (int) (y * Tile.TILE_HEIGHT));
             }
         }
     }
