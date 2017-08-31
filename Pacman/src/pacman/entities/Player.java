@@ -48,7 +48,11 @@ public class Player extends Entity implements LoopPart{
     public void tick() {
 		Point newPos = super.getPos();
 		Tile t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		if(!t.isSolid()){
+		Tile t2 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
+		Tile t3 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]];
+		Tile t4 = Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
+		if(!t.isSolid() && !t2.isSolid() && !t3.isSolid() && !t4.isSolid()){
+			System.out.println("all not solid");
 			switch (id.direction()) {
 				case 0:
 					newPos.y -= 2;
@@ -72,25 +76,24 @@ public class Player extends Entity implements LoopPart{
 				bounds.y = newPos.y;
 			}     
 		}
+		
 		t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
+		t2 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
+		t3 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]];
+		t4 = Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
 		if(t.isSolid()){
-			switch(oldDir){
-				case 0:
-					newPos.y += 2;
-					break;
-				case 1:
-					newPos.x += 2;
-					break;
-				case 2:
-					newPos.y -= 2;
-					break;
-				case 3:
-					newPos.x -=2;
+			newPos.y += 2;
 		}
+		if(t2.isSolid()){
+			newPos.x += 2;
 		}
-		super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);
-
-                        
+		if(t3.isSolid()){
+			newPos.y -= 2;
+		}
+		if(t4.isSolid()){
+			newPos.x -=2;
+		}
+		super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);           
     }
     
 }
