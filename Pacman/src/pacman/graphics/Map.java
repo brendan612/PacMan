@@ -20,7 +20,7 @@ public class Map implements LoopPart {
     
     public static Point playerSpawn, ghostSpawn1, ghostSpawn2, ghostSpawn3, ghostSpawn4;
     
-    private int[][] tiles;
+    public static int[][] tiles;
 
     public Map(GraphicsLoop gl) {
         this.gl = gl;

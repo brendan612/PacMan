@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class Tile{
 
-    public static Tile[] tiles = new Tile[5];
+    public static Tile[] tiles = new Tile[6];
     public static Tile empty = new EmptyTile(0);
     public static Tile pellet = new PelletTile(1);
     public static Tile superPellet = new SuperPelletTile(2);
@@ -26,6 +26,7 @@ public class Tile{
         
         tiles[id] = this;
         bounds = new Rectangle(0,0,TILE_WIDTH,TILE_HEIGHT);
+		tiles[5] = empty;
     }
 
     public void tick(Graphics g, int x, int y) {

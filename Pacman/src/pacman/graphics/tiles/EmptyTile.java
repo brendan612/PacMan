@@ -12,4 +12,9 @@ public class EmptyTile extends Tile {
         super(Map.emptyTexture,id);
     }
     
+	@Override
+	public boolean isSolid(){
+		return false;
+	}
+	
 }
