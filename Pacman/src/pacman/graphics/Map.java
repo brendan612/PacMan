@@ -2,6 +2,8 @@ package pacman.graphics;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.HashMap;
 import pacman.LoopPart;
 import pacman.graphics.tiles.Tile;
 import pacman.utils.ImageLoader;
@@ -17,7 +19,7 @@ public class Map implements LoopPart {
     private final int WIDTH = 28, HEIGHT = 31;
     public static BufferedImage emptyTexture, wallTexture, pelletTexture, superPelletTexture, pacmanTexture, gateTexture;
     public static BufferedImage[] ghostTextures = new BufferedImage[4];
-    
+    public static HashMap<BufferedImage,String> walls = new HashMap<>();
     public static Point playerSpawn, ghostSpawn1, ghostSpawn2, ghostSpawn3, ghostSpawn4;
     
     public static int[][] tiles;
@@ -29,6 +31,7 @@ public class Map implements LoopPart {
 
     public void init() {
         emptyTexture = ImageLoader.loadImage("/images/map/empty.jpg");
+        loadWallTextures();
         wallTexture = ImageLoader.loadImage("/images/map/wall.jpg");
         gateTexture = ImageLoader.loadImage("/images/map/gate.jpg");
         pelletTexture = ImageLoader.loadImage("/images/entities/pellet.jpg");
@@ -102,7 +105,23 @@ public class Map implements LoopPart {
             }
         }
     }
-
+    private void loadWallTextures(){
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/DBL-Horizontal.jpg"), "DBL-Horizontal");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/DBL-Vertical.jpg"), "DBL-Vertical");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/TR-Corner.jpg"), "DBL-TR-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/BR-Corner.jpg"), "DBL-BR-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/BL-Corner.jpg"), "DBL-BL-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width1/TL-Corner.jpg"), "DBL-TL-Corner");
+        
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/SNG-Horizontal.jpg"), "SNG-Horizontal");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/SNG-Vertical.jpg"), "SNG-Vertical");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/TR-Corner.jpg"), "SNG-TR-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/BR-Corner.jpg"), "SNG-BR-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/BL-Corner.jpg"), "SNG-BL-Corner");
+        walls.put(ImageLoader.loadImage("/images/map/walls/width2/TL-Corner.jpg"), "SNG-TL-Corner");
+        
+        
+    }
     public Point getPlayerSpawn() {
         return playerSpawn;
     }
