@@ -42,7 +42,7 @@ public class Display {
         canvas.setMaximumSize(new Dimension(width,height));
         canvas.setMinimumSize(new Dimension(width,height));
         canvas.setFocusable(false);
-        canvas.setBackground(Color.white);
+        canvas.setBackground(Color.black);
         frame.add(canvas);
         frame.pack();
 		canvas.createBufferStrategy(3);
