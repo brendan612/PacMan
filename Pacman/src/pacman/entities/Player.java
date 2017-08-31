@@ -52,7 +52,6 @@ public class Player extends Entity implements LoopPart{
 		Tile t3 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]];
 		Tile t4 = Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
 		if(!t.isSolid() && !t2.isSolid() && !t3.isSolid() && !t4.isSolid()){
-			System.out.println("all not solid");
 			switch (id.direction()) {
 				case 0:
 					newPos.y -= 2;
