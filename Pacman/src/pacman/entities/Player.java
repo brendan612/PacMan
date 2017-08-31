@@ -46,12 +46,15 @@ public class Player extends Entity implements LoopPart{
 	//finding conceptual objects
     @Override
     public void tick() {
+		move();
+		checkMove();
+		super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);           
+    }
+	
+    private void move(){
 		Point newPos = super.getPos();
-		Tile t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		Tile t2 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		Tile t3 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]];
-		Tile t4 = Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		if(!t.isSolid() && !t2.isSolid() && !t3.isSolid() && !t4.isSolid()){
+		Tile[] t = getTiles();
+		if(!t[0].isSolid() && !t[1].isSolid() && !t[2].isSolid() && !t[3].isSolid()){
 			switch (id.direction()) {
 				case 0:
 					newPos.y -= 2;
@@ -75,24 +78,30 @@ public class Player extends Entity implements LoopPart{
 				bounds.y = newPos.y;
 			}     
 		}
-		
-		t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		t2 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		t3 = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]];
-		t4 = Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
-		if(t.isSolid()){
+	}
+	
+	private void checkMove(){
+		Tile[] t = getTiles();
+		Point newPos = super.getPos();
+		if(t[0].isSolid()){
 			newPos.y += 2;
 		}
-		if(t2.isSolid()){
+		if(t[1].isSolid()){
 			newPos.x += 2;
 		}
-		if(t3.isSolid()){
+		if(t[2].isSolid()){
 			newPos.y -= 2;
 		}
-		if(t4.isSolid()){
+		if(t[3].isSolid()){
 			newPos.x -=2;
 		}
-		super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);           
-    }
-    
+	}
+	
+	private Tile[] getTiles(){
+		Tile[] ret = {Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]],
+			Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]],
+			Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][(super.getPos().y-1)/(Tile.TILE_HEIGHT*2)+1]],
+			Tile.tiles[Map.tiles[(super.getPos().x-1)/(Tile.TILE_WIDTH*2)+1][super.getPos().y/(Tile.TILE_HEIGHT*2)]]};
+		return ret;
+	}
 }
