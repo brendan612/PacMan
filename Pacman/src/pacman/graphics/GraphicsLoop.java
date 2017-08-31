@@ -16,11 +16,11 @@ import pacman.userinput.InputDevice;
 
 public class GraphicsLoop implements LoopPart{
     private final String TITLE = "Pac-Man";
-    private final int WIDTH = 28*32, HEIGHT = 31*32;
+    private final int WIDTH = 28*32, HEIGHT = 31*32 + 100;
     
     private Display display;
     private Map map;
-    
+    public static final int mapOffset = 100;
     private BufferStrategy bs;
     private Graphics g;
     
@@ -47,9 +47,6 @@ public class GraphicsLoop implements LoopPart{
 	
 
     @Override
-	//The tick method is overall a general method for what each 
-	//object needs to do each tick 
-	//(IT IS LITERALLY THE SAME AS THE RENDER METHOD)
     public void tick() {
         bs = display.getCanvas().getBufferStrategy();
         if(bs == null){
