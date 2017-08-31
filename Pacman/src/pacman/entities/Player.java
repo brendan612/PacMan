@@ -40,10 +40,13 @@ public class Player extends Entity implements LoopPart{
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+	//skillfully assigning responsibilities to objects
+	//identifying the problem and its requirements
+	//Finding a conceptual solution
+	//finding conceptual objects
     @Override
     public void tick() {
 		Point newPos = super.getPos();
-		System.out.println(Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]);
 		Tile t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
 		if(!t.isSolid()){
 			switch (id.direction()) {
@@ -68,7 +71,9 @@ public class Player extends Entity implements LoopPart{
 				bounds.x = newPos.x;
 				bounds.y = newPos.y;
 			}     
-		}else{
+		}
+		t = Tile.tiles[Map.tiles[super.getPos().x/(Tile.TILE_WIDTH*2)][super.getPos().y/(Tile.TILE_HEIGHT*2)]];
+		if(t.isSolid()){
 			switch(oldDir){
 				case 0:
 					newPos.y += 2;
