@@ -3,6 +3,7 @@ package pacman.graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import pacman.LoopPart;
 import pacman.graphics.tiles.Tile;
@@ -16,13 +17,13 @@ import pacman.utils.Utils;
 public class Map implements LoopPart {
 
     private GraphicsLoop gl;
-    private final int WIDTH = 28, HEIGHT = 31;
+    private static final int WIDTH = 28, HEIGHT = 31;
     public static BufferedImage emptyTexture, wallTexture, pelletTexture, superPelletTexture, pacmanTexture, gateTexture;
     public static BufferedImage[] ghostTextures = new BufferedImage[4];
-    public static HashMap<BufferedImage,String> walls = new HashMap<>();
+    public static HashMap<String, BufferedImage> walls = new HashMap<>();
     public static Point playerSpawn, ghostSpawn1, ghostSpawn2, ghostSpawn3, ghostSpawn4;
     
-    public static int[][] tiles;
+    public static int[][] tiles, detailedTiles;
 
     public Map(GraphicsLoop gl) {
         this.gl = gl;
@@ -32,7 +33,7 @@ public class Map implements LoopPart {
     public void init() {
         emptyTexture = ImageLoader.loadImage("/images/map/empty.jpg");
         loadWallTextures();
-        wallTexture = ImageLoader.loadImage("/images/map/wall.jpg");
+      //  wallTexture = ImageLoader.loadImage("/images/map/wall.jpg");
         gateTexture = ImageLoader.loadImage("/images/map/gate.jpg");
         pelletTexture = ImageLoader.loadImage("/images/entities/pellet.jpg");
         superPelletTexture = ImageLoader.loadImage("/images/entities/super-pellet.jpg");
@@ -41,6 +42,7 @@ public class Map implements LoopPart {
         ghostTextures[1] = ImageLoader.loadImage("/images/entities/pinky.jpg");
         ghostTextures[2] = ImageLoader.loadImage("/images/entities/inky.jpg");
         ghostTextures[3] = ImageLoader.loadImage("/images/entities/clyde.jpg");
+
         loadMapAsString("mapLayout.txt");
     }
 
@@ -50,7 +52,6 @@ public class Map implements LoopPart {
             for (int x = 0; x < WIDTH; x++) {
                 getTile(x, y).tick(gl.getG(), (int) (x * Tile.TILE_WIDTH * 2),
                         (int) (y * Tile.TILE_HEIGHT * 2));
-                //  System.out.println(getTile(x,y).id);
             }
         }
     }
@@ -75,12 +76,18 @@ public class Map implements LoopPart {
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split("\\s+");
 
-        tiles = new int[WIDTH][HEIGHT];
+        detailedTiles = tiles = new int[WIDTH][HEIGHT];
+        
         int ghostCount = 0;
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * WIDTH)]);
-                
+                if(Utils.parseInt(tokens[(x + y * WIDTH)]) > 9){
+                    System.out.println(Utils.parseInt(tokens[(x + y * WIDTH)]));
+                    detailedTiles[x][y] = Utils.parseInt(tokens[(x +y * WIDTH)]);
+                    tiles[x][y] = 3;
+                } else{
+                    detailedTiles[x][y] = tiles[x][y] = Utils.parseInt(tokens[(x + y * WIDTH)]);
+                }
                 if (Utils.parseInt(tokens[(x + y * WIDTH)]) == 5) {
                     playerSpawn = new Point(x * Tile.TILE_WIDTH*2, y * Tile.TILE_HEIGHT*2);
                     
@@ -106,19 +113,19 @@ public class Map implements LoopPart {
         }
     }
     private void loadWallTextures(){
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/DBL-Horizontal.jpg"), "DBL-Horizontal");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/DBL-Vertical.jpg"), "DBL-Vertical");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/TR-Corner.jpg"), "DBL-TR-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/BR-Corner.jpg"), "DBL-BR-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/BL-Corner.jpg"), "DBL-BL-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width1/TL-Corner.jpg"), "DBL-TL-Corner");
+        walls.put("DBL-Horizontal", ImageLoader.loadImage("/images/map/walls/width1/DBL-Horizontal.jpg"));
+        walls.put("DBL-Vertical", ImageLoader.loadImage("/images/map/walls/width1/DBL-Vertical.jpg"));
+        walls.put("DBL-TR-Corner", ImageLoader.loadImage("/images/map/walls/width1/DBL-TR-Corner.jpg"));
+        walls.put("DBL-BR-Corner", ImageLoader.loadImage("/images/map/walls/width1/DBL-BR-Corner.jpg"));
+        walls.put("DBL-BL-Corner", ImageLoader.loadImage("/images/map/walls/width1/DBL-BL-Corner.jpg"));
+        walls.put("DBL-TL-Corner", ImageLoader.loadImage("/images/map/walls/width1/DBL-TL-Corner.jpg"));
         
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/SNG-Horizontal.jpg"), "SNG-Horizontal");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/SNG-Vertical.jpg"), "SNG-Vertical");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/TR-Corner.jpg"), "SNG-TR-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/BR-Corner.jpg"), "SNG-BR-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/BL-Corner.jpg"), "SNG-BL-Corner");
-        walls.put(ImageLoader.loadImage("/images/map/walls/width2/TL-Corner.jpg"), "SNG-TL-Corner");
+        walls.put("SNG-Horizontal", ImageLoader.loadImage("/images/map/walls/width2/SNG-Horizontal.jpg"));
+        walls.put("SNG-Vertical", ImageLoader.loadImage("/images/map/walls/width2/SNG-Vertical.jpg"));
+        walls.put("SNG-TR-Corner", ImageLoader.loadImage("/images/map/walls/width2/SNG-TR-Corner.jpg"));
+        walls.put("SNG-BR-Corner", ImageLoader.loadImage("/images/map/walls/width2/SNG-BR-Corner.jpg"));
+        walls.put("SNG-BL-Corner", ImageLoader.loadImage("/images/map/walls/width2/SNG-BL-Corner.jpg"));
+        walls.put("SNG-TL-Corner", ImageLoader.loadImage("/images/map/walls/width2/SNG-TL-Corner.jpg"));
         
         
     }
@@ -162,4 +169,13 @@ public class Map implements LoopPart {
         this.ghostSpawn4 = ghostSpawn4;
     }
 
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    
 }
