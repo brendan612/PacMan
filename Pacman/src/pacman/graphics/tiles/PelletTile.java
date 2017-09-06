@@ -7,7 +7,7 @@ import pacman.graphics.Map;
  */
 public class PelletTile extends Tile {
     public PelletTile(int id) {
-        super(Map.pelletTexture, id);       
+        super(Map.pelletTexture, id,0,0);       
     }
     
 }

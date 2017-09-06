@@ -9,7 +9,7 @@ import pacman.graphics.Map;
 public class GateTile extends Tile {
 
     public GateTile(int id) {
-        super(Map.gateTexture,id);
+        super(Map.gateTexture,id,0,0);
     }
     
 }

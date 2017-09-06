@@ -5,13 +5,11 @@
  */
 package pacman.graphics;
 
-import java.awt.Color;
-import pacman.entities.Player;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import pacman.LoopPart;
 import pacman.graphics.display.Display;
-import pacman.graphics.tiles.Tile;
 import pacman.userinput.InputDevice;
 
 public class GraphicsLoop implements LoopPart{
@@ -22,7 +20,7 @@ public class GraphicsLoop implements LoopPart{
     private Map map;
     public static final int mapOffset = 100;
     private BufferStrategy bs;
-    private Graphics g;
+    private Graphics2D g;
     
     public GraphicsLoop(InputDevice id) {
         display = new Display(TITLE,WIDTH,HEIGHT, id);
@@ -33,7 +31,7 @@ public class GraphicsLoop implements LoopPart{
 		return g;
 	}
 
-	public void setG(Graphics g) {
+	public void setG(Graphics2D g) {
 		this.g = g;
 	}
 
@@ -53,7 +51,7 @@ public class GraphicsLoop implements LoopPart{
             display.getCanvas().createBufferStrategy(3);
             return;
         }
-        g = (bs.getDrawGraphics());
+        g = (Graphics2D) (bs. getDrawGraphics());
         g.clearRect(0, 0, WIDTH, HEIGHT);
         map.tick();
     }

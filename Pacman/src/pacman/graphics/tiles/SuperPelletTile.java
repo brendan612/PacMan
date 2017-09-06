@@ -9,7 +9,7 @@ import pacman.graphics.Map;
 public class SuperPelletTile extends Tile {
 
     public SuperPelletTile(int id) {
-        super(Map.superPelletTexture,id);
+        super(Map.superPelletTexture,id,0,0);
     }
 
     

@@ -9,7 +9,7 @@ import pacman.graphics.Map;
 public class EmptyTile extends Tile {
 
     public EmptyTile(int id) {
-        super(Map.emptyTexture,id);
+        super(Map.emptyTexture,id,0,0);
     }
     
 	@Override

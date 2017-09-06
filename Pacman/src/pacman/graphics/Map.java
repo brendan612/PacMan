@@ -2,8 +2,7 @@ package pacman.graphics;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import pacman.LoopPart;
 import pacman.graphics.tiles.Tile;
@@ -17,14 +16,15 @@ import pacman.utils.Utils;
 public class Map implements LoopPart {
 
     private GraphicsLoop gl;
-    private static final int WIDTH = 28, HEIGHT = 31;
-    public static BufferedImage emptyTexture, wallTexture, pelletTexture, superPelletTexture, pacmanTexture, gateTexture;
-    public static BufferedImage[] ghostTextures = new BufferedImage[4];
+    public static final int WIDTH = 28, HEIGHT = 31;
+    public static BufferedImage emptyTexture, pelletTexture, superPelletTexture, gateTexture;
+    public static BufferedImage[] ghostTextures = new BufferedImage[4],pacmanTexture = new BufferedImage[2];
     public static HashMap<String, BufferedImage> walls = new HashMap<>();
     public static Point playerSpawn, ghostSpawn1, ghostSpawn2, ghostSpawn3, ghostSpawn4;
     
     public static int[][] tiles, detailedTiles;
-
+    public ArrayList<Tile> tileMap = new ArrayList<>();
+    private String[] tokens = new String[868];
     public Map(GraphicsLoop gl) {
         this.gl = gl;
         init();
@@ -33,60 +33,48 @@ public class Map implements LoopPart {
     public void init() {
         emptyTexture = ImageLoader.loadImage("/images/map/empty.jpg");
         loadWallTextures();
-      //  wallTexture = ImageLoader.loadImage("/images/map/wall.jpg");
         gateTexture = ImageLoader.loadImage("/images/map/gate.jpg");
         pelletTexture = ImageLoader.loadImage("/images/entities/pellet.jpg");
         superPelletTexture = ImageLoader.loadImage("/images/entities/super-pellet.jpg");
-        pacmanTexture = ImageLoader.loadImage("/images/entities/pacman.jpg");
+        pacmanTexture[0] = ImageLoader.loadImage("/images/entities/pacman-animated.gif");
+        pacmanTexture[1] = ImageLoader.loadImage("/images/entities/pacman2.gif");
         ghostTextures[0] = ImageLoader.loadImage("/images/entities/blinky.jpg");
         ghostTextures[1] = ImageLoader.loadImage("/images/entities/pinky.jpg");
         ghostTextures[2] = ImageLoader.loadImage("/images/entities/inky.jpg");
         ghostTextures[3] = ImageLoader.loadImage("/images/entities/clyde.jpg");
 
         loadMapAsString("mapLayout.txt");
-    }
-
-    @Override
-    public void tick() {
+        
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
-                getTile(x, y).tick(gl.getG(), (int) (x * Tile.TILE_WIDTH * 2),
-                        (int) (y * Tile.TILE_HEIGHT * 2));
+                tileMap.add(new Tile(null,Utils.parseInt(tokens[(x +y * WIDTH)]),x*Tile.TILE_WIDTH*2,y*Tile.TILE_HEIGHT*2));
             }
         }
     }
-
-    public Tile getTile(int x, int y) {
-        if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT) {
-            return Tile.empty;
-        }
-        try {
-            Tile t = Tile.tiles[tiles[x][y]];
-            if (t == null) {
-                return Tile.empty;
-            }
-            return t;
-        } catch (IndexOutOfBoundsException e) {
-            return Tile.empty;
-        }
-
+    @Override
+    public void tick() {
+        
+        tileMap.forEach((t) -> {
+            t.tick(gl.getG());
+        });
+        
     }
-
     private void loadMapAsString(String path) {
         String file = Utils.loadFileAsString(path);
-        String[] tokens = file.split("\\s+");
+        tokens = file.split("\\s+");
 
-        detailedTiles = tiles = new int[WIDTH][HEIGHT];
+        detailedTiles = new int[WIDTH][HEIGHT];
+        tiles = new int[WIDTH][HEIGHT];
         
         int ghostCount = 0;
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
                 if(Utils.parseInt(tokens[(x + y * WIDTH)]) > 9){
-                    System.out.println(Utils.parseInt(tokens[(x + y * WIDTH)]));
                     detailedTiles[x][y] = Utils.parseInt(tokens[(x +y * WIDTH)]);
                     tiles[x][y] = 3;
                 } else{
-                    detailedTiles[x][y] = tiles[x][y] = Utils.parseInt(tokens[(x + y * WIDTH)]);
+                    detailedTiles[x][y] = Utils.parseInt(tokens[(x + y * WIDTH)]);
+                    tiles[x][y] = Utils.parseInt(tokens[(x + y * WIDTH)]);
                 }
                 if (Utils.parseInt(tokens[(x + y * WIDTH)]) == 5) {
                     playerSpawn = new Point(x * Tile.TILE_WIDTH*2, y * Tile.TILE_HEIGHT*2);
