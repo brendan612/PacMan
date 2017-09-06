@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.entities;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
 import pacman.userinput.InputDevice;
@@ -21,27 +15,20 @@ import pacman.graphics.tiles.Tile;
  */
 public class Player extends Entity implements LoopPart {
 
-    private Image[] playerImage = new Image[2];
+    private BufferedImage current;
     private Map map;
     private InputDevice id;
     private int oldDir;
 
-    private AffineTransform identity,trans;
-    private long lastPic, coolDown = 10, timer = coolDown;
-
+    private Animate anim;
+    
     public Player(InputDevice id, GraphicsLoop gl, Point pos, Map map) {
         super(gl, pos);
         this.id = id;
         this.map = map;
         super.setPos(Map.playerSpawn);
-        playerImage[0] = Map.pacmanTexture[0];
-        playerImage[1] = Map.pacmanTexture[1];
-
-        identity = new AffineTransform();
-        trans = new AffineTransform();
-        trans.setTransform(identity);
-        
-        
+        current = Map.pacmanTexture[0];
+        anim = new Animate(250);
     }
     //skillfully assigning responsibilities to objects
     //identifying the problem and its requirements
@@ -50,20 +37,10 @@ public class Player extends Entity implements LoopPart {
 
     @Override
     public void tick() {
-        timer += System.currentTimeMillis() - lastPic;
-        lastPic = System.currentTimeMillis();
         move();
         checkMove();
-        if (timer > 0) {
-            super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);
-            timer--;
-        } else if (timer > -10) {
-            super.getGl().getG().drawImage(playerImage[1], super.getPos().x, super.getPos().y, 32, 32, null);
-            timer--;
-        } else {
-            timer = coolDown;
-            super.getGl().getG().drawImage(playerImage[0], super.getPos().x, super.getPos().y, 32, 32, null);
-        }
+        anim.tick(current,Map.pacmanTexture[4]);
+        super.getGl().getG().drawImage(anim.getCurrent(), super.getPos().x, super.getPos().y, 32, 32, null);
     }
 
     private void move() {
@@ -74,22 +51,22 @@ public class Player extends Entity implements LoopPart {
                 case 0:
                     newPos.y -= 2;
                     oldDir = id.direction();
-                    trans.rotate(Math.toRadians(90));
+                   current = Map.pacmanTexture[1];
                     break;
                 case 1:
                     newPos.x -= 2;
                     oldDir = id.direction();
-                    trans.rotate(Math.toRadians(0));
+                    current = Map.pacmanTexture[0];
                     break;
                 case 2:
                     newPos.y += 2;
                     oldDir = id.direction();
-                    trans.rotate(Math.toRadians(270));
+                    current = Map.pacmanTexture[3];
                     break;
                 case 3:
                     newPos.x += 2;
                     oldDir = id.direction();
-                    trans.rotate(Math.toRadians(180));
+                    current = Map.pacmanTexture[2];
                     break;
             }
             if (super.getGl().getG() != null) {
@@ -122,5 +99,32 @@ public class Player extends Entity implements LoopPart {
             Tile.tiles[Map.tiles[super.getPos().x / (Tile.TILE_WIDTH * 2)][(super.getPos().y - 1) / (Tile.TILE_HEIGHT * 2) + 1]],
             Tile.tiles[Map.tiles[(super.getPos().x - 1) / (Tile.TILE_WIDTH * 2) + 1][super.getPos().y / (Tile.TILE_HEIGHT * 2)]]};
         return ret;
+    }
+}
+class Animate{
+    private long timer,lastTime;
+    private int speed,index;
+    private BufferedImage[] frames;
+    public Animate(int speed){
+        this.speed = speed;
+        
+    }
+    
+    public void tick(BufferedImage ... images){
+        frames = images;
+        
+        timer+= System.currentTimeMillis()- lastTime;
+        lastTime = System.currentTimeMillis();
+        
+        if(timer > speed){
+            index++;
+            timer = 0;
+            if (index >= frames.length)
+                index = 0;
+        }
+    }
+    
+    public BufferedImage getCurrent(){
+        return frames[index];
     }
 }

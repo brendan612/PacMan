@@ -18,7 +18,7 @@ public class Map implements LoopPart {
     private GraphicsLoop gl;
     public static final int WIDTH = 28, HEIGHT = 31;
     public static BufferedImage emptyTexture, pelletTexture, superPelletTexture, gateTexture;
-    public static BufferedImage[] ghostTextures = new BufferedImage[4],pacmanTexture = new BufferedImage[2];
+    public static BufferedImage[] ghostTextures = new BufferedImage[4],pacmanTexture = new BufferedImage[5];
     public static HashMap<String, BufferedImage> walls = new HashMap<>();
     public static Point playerSpawn, ghostSpawn1, ghostSpawn2, ghostSpawn3, ghostSpawn4;
     
@@ -30,14 +30,19 @@ public class Map implements LoopPart {
         init();
     }
 
-    public void init() {
+    private void init() {
         emptyTexture = ImageLoader.loadImage("/images/map/empty.jpg");
         loadWallTextures();
         gateTexture = ImageLoader.loadImage("/images/map/gate.jpg");
         pelletTexture = ImageLoader.loadImage("/images/entities/pellet.jpg");
         superPelletTexture = ImageLoader.loadImage("/images/entities/super-pellet.jpg");
-        pacmanTexture[0] = ImageLoader.loadImage("/images/entities/pacman-animated.gif");
-        pacmanTexture[1] = ImageLoader.loadImage("/images/entities/pacman2.gif");
+   
+        pacmanTexture[0] = ImageLoader.loadImage("/images/entities/pacman-left.gif");
+        pacmanTexture[1] = ImageLoader.loadImage("/images/entities/pacman-up.gif");
+        pacmanTexture[2] = ImageLoader.loadImage("/images/entities/pacman-right.gif");
+        pacmanTexture[3] = ImageLoader.loadImage("/images/entities/pacman-down.gif");
+        pacmanTexture[4] = ImageLoader.loadImage("/images/entities/pacman2.gif");
+   
         ghostTextures[0] = ImageLoader.loadImage("/images/entities/blinky.jpg");
         ghostTextures[1] = ImageLoader.loadImage("/images/entities/pinky.jpg");
         ghostTextures[2] = ImageLoader.loadImage("/images/entities/inky.jpg");
