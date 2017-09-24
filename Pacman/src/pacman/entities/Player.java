@@ -1,7 +1,7 @@
 package pacman.entities;
 
-import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import pacman.LoopPart;
 import pacman.graphics.GraphicsLoop;
@@ -20,6 +20,8 @@ public class Player extends Entity implements LoopPart {
     private InputDevice id;
     private int oldDir;
 
+    public static int points = 0;
+    public static Point pos2;
     private Animate anim;
     
     public Player(InputDevice id, GraphicsLoop gl, Point pos, Map map) {
@@ -28,6 +30,7 @@ public class Player extends Entity implements LoopPart {
         this.map = map;
         super.setPos(Map.playerSpawn);
         current = Map.pacmanTexture[0];
+        pos2 = pos;
         anim = new Animate(250);
     }
     //skillfully assigning responsibilities to objects
@@ -41,6 +44,13 @@ public class Player extends Entity implements LoopPart {
         checkMove();
         anim.tick(current,Map.pacmanTexture[4]);
         super.getGl().getG().drawImage(anim.getCurrent(), super.getPos().x, super.getPos().y, 32, 32, null);
+        
+        Tile t = Tile.tiles[Map.tiles[Player.pos2.x /(Tile.TILE_WIDTH * 2)][Player.pos2.y / (Tile.TILE_HEIGHT * 2)]];
+        if(bounds.x == t.getBounds().x && bounds.y == t.getBounds().y && (t.id == 1 || t.id == 2)){
+            t.texture = Map.emptyTexture;
+            points+=5;
+            System.out.println("his");
+        }
     }
 
     private void move() {
@@ -74,6 +84,7 @@ public class Player extends Entity implements LoopPart {
                 bounds.y = newPos.y;
             }
         }
+        pos2 = pos;
     }
 
     private void checkMove() {
@@ -98,33 +109,7 @@ public class Player extends Entity implements LoopPart {
             Tile.tiles[Map.tiles[super.getPos().x / (Tile.TILE_WIDTH * 2)][super.getPos().y / (Tile.TILE_HEIGHT * 2)]],
             Tile.tiles[Map.tiles[super.getPos().x / (Tile.TILE_WIDTH * 2)][(super.getPos().y - 1) / (Tile.TILE_HEIGHT * 2) + 1]],
             Tile.tiles[Map.tiles[(super.getPos().x - 1) / (Tile.TILE_WIDTH * 2) + 1][super.getPos().y / (Tile.TILE_HEIGHT * 2)]]};
+        
         return ret;
-    }
-}
-class Animate{
-    private long timer,lastTime;
-    private int speed,index;
-    private BufferedImage[] frames;
-    public Animate(int speed){
-        this.speed = speed;
-        
-    }
-    
-    public void tick(BufferedImage ... images){
-        frames = images;
-        
-        timer+= System.currentTimeMillis()- lastTime;
-        lastTime = System.currentTimeMillis();
-        
-        if(timer > speed){
-            index++;
-            timer = 0;
-            if (index >= frames.length)
-                index = 0;
-        }
-    }
-    
-    public BufferedImage getCurrent(){
-        return frames[index];
     }
 }

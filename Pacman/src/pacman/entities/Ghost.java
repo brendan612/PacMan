@@ -29,16 +29,16 @@ public class Ghost extends Entity {
 		switch(name){
 			case Inky:
 				GhostMovements.inky(pos);
-				super.getGl().getG().drawImage(Map.ghostTextures[1], Map.ghostSpawn2.x, Map.ghostSpawn2.y,Tile.TILE_WIDTH*2 ,Tile.TILE_HEIGHT*2 , null);
+				super.getGl().getG().drawImage(Map.ghostTextures[1], Map.ghostSpawn2.x, Map.ghostSpawn2.y,Tile.TILE_WIDTH ,Tile.TILE_HEIGHT , null);
 				break;
 			case Blinky:
-				super.getGl().getG().drawImage(Map.ghostTextures[0], Map.ghostSpawn1.x, Map.ghostSpawn1.y,Tile.TILE_WIDTH*2 ,Tile.TILE_HEIGHT*2 , null);
+				super.getGl().getG().drawImage(Map.ghostTextures[0], Map.ghostSpawn1.x, Map.ghostSpawn1.y,Tile.TILE_WIDTH ,Tile.TILE_HEIGHT , null);
 				break;
 			case Pinky:
-				super.getGl().getG().drawImage(Map.ghostTextures[2], Map.ghostSpawn3.x, Map.ghostSpawn3.y,Tile.TILE_WIDTH*2 ,Tile.TILE_HEIGHT*2 , null);
+				super.getGl().getG().drawImage(Map.ghostTextures[2], Map.ghostSpawn3.x, Map.ghostSpawn3.y,Tile.TILE_WIDTH ,Tile.TILE_HEIGHT , null);
 				break;
 			case Clyde:
-				super.getGl().getG().drawImage(Map.ghostTextures[3], Map.ghostSpawn4.x, Map.ghostSpawn4.y,Tile.TILE_WIDTH*2 ,Tile.TILE_HEIGHT*2 , null);
+				super.getGl().getG().drawImage(Map.ghostTextures[3], Map.ghostSpawn4.x, Map.ghostSpawn4.y,Tile.TILE_WIDTH ,Tile.TILE_HEIGHT , null);
 				break;
 		}
 	}

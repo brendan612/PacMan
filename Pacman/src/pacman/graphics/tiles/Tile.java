@@ -1,8 +1,10 @@
 package pacman.graphics.tiles;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import pacman.entities.Player;
 import pacman.graphics.Map;
 
 public class Tile {
@@ -22,7 +24,7 @@ public class Tile {
     public int id;
 
     private final int X, Y;
-
+    
     public Tile(BufferedImage texture, int id, int x, int y) {
         this.texture = texture;
         this.id = id;
@@ -37,12 +39,11 @@ public class Tile {
 
     public void tick(Graphics g) {
 
-        g.drawImage(texture, X, Y, TILE_WIDTH * 2, TILE_HEIGHT * 2, null);
+         g.drawImage(texture, X, Y, TILE_WIDTH * 2, TILE_HEIGHT * 2, null);
 
     }
 
     private void getRealTextureAndID() {
-        //  System.out.println("test");
         switch (id) {
             case 0:
                 texture = Map.emptyTexture;

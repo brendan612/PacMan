@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import pacman.LoopPart;
+import pacman.game.menu.Menu;
 import pacman.graphics.display.Display;
 import pacman.userinput.InputDevice;
 
@@ -18,12 +19,14 @@ public class GraphicsLoop implements LoopPart{
     
     private Display display;
     private Map map;
+    private Menu menu;
     public static final int mapOffset = 100;
     private BufferStrategy bs;
     private Graphics2D g;
     
-    public GraphicsLoop(InputDevice id) {
+    public GraphicsLoop(InputDevice id[]) {
         display = new Display(TITLE,WIDTH,HEIGHT, id);
+        menu = new Menu(this,id);
         map = new Map(this);
     }
 

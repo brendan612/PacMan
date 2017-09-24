@@ -1,5 +1,4 @@
 package pacman.graphics.tiles;
-import java.awt.Graphics;
 import pacman.graphics.Map;
 /**
  *

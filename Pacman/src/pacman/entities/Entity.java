@@ -18,7 +18,7 @@ import pacman.graphics.tiles.Tile;
  */
 public abstract class Entity implements LoopPart {
 	GraphicsLoop gl;
-	Point pos;
+    public Point pos;
     
     protected Rectangle bounds;
     public Entity( GraphicsLoop gl, Point pos){
